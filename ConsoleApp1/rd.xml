@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Directives>
+  <Application>
+    <Assembly Name="SciterSharpCore">
+      <Type Name="SciterSharp.Interop.SciterXDef+SCN_LOAD_DATA" MarshalStructure="Required All"></Type>
+    </Assembly>
+  </Application>
+</Directives>

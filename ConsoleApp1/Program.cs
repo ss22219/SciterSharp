@@ -1,6 +1,7 @@
 ﻿using SciterSharp;
 using SciterSharp.Interop;
 using System;
+using System.IO;
 
 namespace ConsoleApp1
 {
@@ -9,18 +10,14 @@ namespace ConsoleApp1
         [STAThread]
         static void Main(string[] args)
         {
-            PInvokeWindows.OleInitialize(IntPtr.Zero);
-            var window = new SciterWindow();
-
-            window.CreateMainWindow(1500, 800);
-            window.CenterTopLevelWindow();
-            window.Title = "Test";
-
-            var host = new SciterHost();
-            host.SetupWindow(window);
-            window.Show();
-
-            PInvokeUtils.RunMsgLoop();
+            try
+            {
+                App.Run();
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("Error.txt", ex.ToString());
+            }
         }
     }
 }
