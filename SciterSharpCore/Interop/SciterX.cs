@@ -117,14 +117,13 @@ namespace SciterSharp.Interop
 				api_ptr = SciterAPI64();
 #endif
 
-                _api = (ISciterAPI)Marshal.PtrToStructure(api_ptr, typeof(ISciterAPI));
+                _api = Marshal.PtrToStructure<ISciterAPI>(api_ptr);
 
                 // from time to time, Sciter changes its ABI
                 // here we test the minimum Sciter version this library is compatible with
                 uint major = _api.Value.SciterVersion(1);
                 uint minor = _api.Value.SciterVersion(0);
                 Debug.Assert(major >= 0x00040000);
-                Debug.Assert(_api.Value.version == 0);
             }
 
             return _api.Value;
@@ -145,7 +144,7 @@ namespace SciterSharp.Interop
                     Debug.Assert(api_struct_size == 276);
 
                 IntPtr api_ptr = API.GetSciterGraphicsAPI();
-                _gapi = (SciterXGraphics.ISciterGraphicsAPI)Marshal.PtrToStructure(api_ptr, typeof(SciterXGraphics.ISciterGraphicsAPI));
+                _gapi = Marshal.PtrToStructure<SciterXGraphics.ISciterGraphicsAPI>(api_ptr);
             }
             return _gapi.Value;
         }
@@ -161,7 +160,7 @@ namespace SciterSharp.Interop
                     Debug.Assert(api_struct_size == 104);
 
                 IntPtr api_ptr = API.GetSciterRequestAPI();
-                _rapi = (SciterXRequest.ISciterRequestAPI)Marshal.PtrToStructure(api_ptr, typeof(SciterXRequest.ISciterRequestAPI));
+                _rapi = Marshal.PtrToStructure<SciterXRequest.ISciterRequestAPI>(api_ptr);
             }
             return _rapi.Value;
         }
@@ -178,7 +177,7 @@ namespace SciterSharp.Interop
 
                 IntPtr api_ptr = API.TIScriptAPI();
 
-                _tiapi = (TIScript.ISciterTIScriptAPI)Marshal.PtrToStructure(api_ptr, typeof(TIScript.ISciterTIScriptAPI));
+                _tiapi = Marshal.PtrToStructure<TIScript.ISciterTIScriptAPI>(api_ptr);
             }
             return _tiapi.Value;
         }

@@ -11,6 +11,9 @@ namespace ConsoleApp1
     {
         public static void Run()
         {
+#if X64
+            SciterX.Use3264DLLNaming = true;
+#endif
             PInvokeWindows.OleInitialize(IntPtr.Zero);
             var window = new SciterWindow();
             window.CreateMainWindow(500, 500);
@@ -34,9 +37,6 @@ namespace ConsoleApp1
             _window = window;
             SetupWindow(_window);
             window.Show();
-#if DEBUG
-            DebugInspect();
-#endif
         }
 
         protected override SciterXDef.LoadResult OnLoadData(SciterXDef.SCN_LOAD_DATA sld)

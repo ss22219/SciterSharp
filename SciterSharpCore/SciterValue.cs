@@ -164,7 +164,7 @@ namespace SciterSharp
 				// Get the list of SciterXValue.VALUE from the ptr
 				SciterValue[] args = new SciterValue[argc];
 				for(int i = 0; i < argc; i++)
-					args[i] = new SciterValue((SciterXValue.VALUE)Marshal.PtrToStructure(IntPtr.Add(argv, i * Marshal.SizeOf(typeof(SciterXValue.VALUE))), typeof(SciterXValue.VALUE)));
+					args[i] = new SciterValue(Marshal.PtrToStructure<SciterXValue.VALUE>(IntPtr.Add(argv, i * Marshal.SizeOf<SciterXValue.VALUE>())));
 
 				retval = func(args).ToVALUE();
 				return true;
@@ -199,7 +199,7 @@ namespace SciterSharp
 				// Get the list of SciterXValue.VALUE from the ptr
 				SciterValue[] args = new SciterValue[argc];
 				for(int i = 0; i < argc; i++)
-					args[i] = new SciterValue((SciterXValue.VALUE)Marshal.PtrToStructure(IntPtr.Add(argv, i * Marshal.SizeOf(typeof(SciterXValue.VALUE))), typeof(SciterXValue.VALUE)));
+					args[i] = new SciterValue(Marshal.PtrToStructure<SciterXValue.VALUE>(IntPtr.Add(argv, i * Marshal.SizeOf<SciterXValue.VALUE>())));
 
 				func(args);
 				retval = new SciterXValue.VALUE();

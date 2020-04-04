@@ -317,7 +317,7 @@ namespace SciterSharp
         // Notification handler
         private uint HandleNotification(IntPtr ptrNotification, IntPtr callbackParam)
         {
-            SciterXDef.SCITER_CALLBACK_NOTIFICATION scn = (SciterXDef.SCITER_CALLBACK_NOTIFICATION)Marshal.PtrToStructure(ptrNotification, typeof(SciterXDef.SCITER_CALLBACK_NOTIFICATION));
+            SciterXDef.SCITER_CALLBACK_NOTIFICATION scn = Marshal.PtrToStructure<SciterXDef.SCITER_CALLBACK_NOTIFICATION>(ptrNotification);
 
             switch (scn.code)
             {
@@ -339,8 +339,8 @@ namespace SciterSharp
                         SciterXBehaviors.FPTR_ElementEventProc proc = elementEvh._proc;
                         IntPtr ptrProc = Marshal.GetFunctionPointerForDelegate(proc);
 
-                        IntPtr EVENTPROC_OFFSET = Marshal.OffsetOf(typeof(SciterXDef.SCN_ATTACH_BEHAVIOR), "elementProc");
-                        IntPtr EVENTPROC_OFFSET2 = Marshal.OffsetOf(typeof(SciterXDef.SCN_ATTACH_BEHAVIOR), "elementTag");
+                        IntPtr EVENTPROC_OFFSET = Marshal.OffsetOf<SciterXDef.SCN_ATTACH_BEHAVIOR>("elementProc");
+                        IntPtr EVENTPROC_OFFSET2 = Marshal.OffsetOf<SciterXDef.SCN_ATTACH_BEHAVIOR>("elementTag");
                         Marshal.WriteIntPtr(ptrNotification, EVENTPROC_OFFSET.ToInt32(), ptrProc);
                         Marshal.WriteInt32(ptrNotification, EVENTPROC_OFFSET2.ToInt32(), 0);
                         return 1;
@@ -372,7 +372,7 @@ namespace SciterSharp
                         lreturn = OnPostedNotification(spn.wparam, spn.lparam);
                     }
 
-                    IntPtr OFFSET_LRESULT = Marshal.OffsetOf(typeof(SciterXDef.SCN_POSTED_NOTIFICATION), "lreturn");
+                    IntPtr OFFSET_LRESULT = Marshal.OffsetOf<SciterXDef.SCN_POSTED_NOTIFICATION>("lreturn");
                     Marshal.WriteIntPtr(ptrNotification, OFFSET_LRESULT.ToInt32(), lreturn);
                     return 0;
 
